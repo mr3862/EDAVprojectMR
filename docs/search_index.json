@@ -4,6 +4,6 @@
 ["data-transformation.html", "Chapter 3 Data transformation", " Chapter 3 Data transformation "],
 ["missing-values.html", "Chapter 4 Missing values", " Chapter 4 Missing values "],
 ["results.html", "Chapter 5 Results", " Chapter 5 Results "],
-["interactive-component.html", "Chapter 6 Interactive component", " Chapter 6 Interactive component /* On mouse hover, lighten state color */ path:hover { fill-opacity: .7; } /* Style for Custom Tooltip */ div.tooltip { position: absolute; text-align: center; width: 60px; height: 28px; padding: 2px; font: 12px sans-serif; background: white; border: 0px; border-radius: 8px; pointer-events: none; } /* Legend Font Style */ body { font: 11px sans-serif; } /* Legend Position Style */ .legend { position:absolute; left:800px; top:350px; } "],
+["interactive-component.html", "Chapter 6 Interactive component 6.1 SVG goes here 6.2 Javascript end", " Chapter 6 Interactive component /* On mouse hover, lighten state color */ path:hover { fill-opacity: .7; } /* Style for Custom Tooltip */ div.tooltip { position: absolute; text-align: center; width: 60px; height: 28px; padding: 2px; font: 12px sans-serif; background: white; border: 0px; border-radius: 8px; pointer-events: none; } /* Legend Font Style */ body { font: 11px sans-serif; } /* Legend Position Style */ .legend { position:absolute; left:800px; top:350px; } 6.1 SVG goes here 6.2 Javascript end "],
 ["conclusion.html", "Chapter 7 Conclusion", " Chapter 7 Conclusion "]
 ]
