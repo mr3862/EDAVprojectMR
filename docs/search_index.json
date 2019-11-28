@@ -1,9 +1,9 @@
 [
-["index.html", "YOUR TITLE HERE Chapter 1 Introduction", " YOUR TITLE HERE YOUR NAMES HERE 2019-11-23 Chapter 1 Introduction "],
+["index.html", "Interactive Demographic of USA Chapter 1 Introduction", " Interactive Demographic of USA Mamunur Rashid 2019-11-28 Chapter 1 Introduction "],
 ["data-sources.html", "Chapter 2 Data sources", " Chapter 2 Data sources "],
 ["data-transformation.html", "Chapter 3 Data transformation", " Chapter 3 Data transformation "],
 ["missing-values.html", "Chapter 4 Missing values", " Chapter 4 Missing values "],
 ["results.html", "Chapter 5 Results", " Chapter 5 Results "],
-["interactive-component.html", "Chapter 6 Interactive component", " Chapter 6 Interactive component "],
+["interactive-component.html", "Chapter 6 Interactive component", " Chapter 6 Interactive component /* On mouse hover, lighten state color */ path:hover { fill-opacity: .7; } /* Style for Custom Tooltip */ div.tooltip { position: absolute; text-align: center; width: 60px; height: 28px; padding: 2px; font: 12px sans-serif; background: white; border: 0px; border-radius: 8px; pointer-events: none; } /* Legend Font Style */ body { font: 11px sans-serif; } /* Legend Position Style */ .legend { position:absolute; left:800px; top:350px; } "],
 ["conclusion.html", "Chapter 7 Conclusion", " Chapter 7 Conclusion "]
 ]
