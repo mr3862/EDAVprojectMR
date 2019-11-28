@@ -36,6 +36,7 @@ body {
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
+## SVG goes here
 <svg id="usa" width="960" height="500">
 </svg>
 
@@ -209,5 +210,5 @@ var legend = d3.select("body").append("svg")
 
 });
 </script>
-
+## Javascript end
 
