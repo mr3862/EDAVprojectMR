@@ -1,0 +1,92 @@
+#divSocial a.fa {
+  padding: 15px;
+  font-size: 25px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 3px 2px;
+  color: white;  
+  background: gray;
+}
+
+#divSocial a.fa:hover {
+    opacity: 0.7;
+}
+
+#divSocial a.fa-facebook {
+  /*background: #3B5998;*/
+  color: white;
+  background: gray; 
+}
+#divSocial a.fa-facebook:hover {
+  background: #3B5998;
+}
+#divSocial a.fa-facebook.active {
+  background: #3B5998 !important;
+}
+
+#divSocial a.fa-twitter {
+ /* background: #55ACEE;*/
+  color: white;
+  background: gray;
+}
+#divSocial a.fa-twitter:hover {
+  background: #55ACEE;
+}
+#divSocial a.fa-twitter.active {
+  background: #55ACEE !important;
+}
+
+
+#divSocial a.fa-linkedin:hover {
+  background: #007bb5;
+}
+#divSocial a.fa-linkedin.active {
+  background: #007bb5!important;
+}
+
+#divSocial a.fa-instagram:hover {
+  background: #125688;
+}
+#divSocial a.fa-instagram.active {
+  background: #125688 !important;
+}
+
+#divSocial a.fa-snapchat-ghost {
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+#divSocial a.fa-snapchat-ghost:hover {
+  background: #fffc00;
+}
+#divSocial a.fa-snapchat-ghost.active {
+  background: #fffc00!important;
+}
+
+
+#divSocial a.fa-whatsapp:hover {
+  background: #25d366;
+}
+#divSocial a.fa-whatsapp.active {
+  background: #25d366!important;
+}
+
+#divSocial a.fa-youtube:hover {
+  background: #bb0000;
+}
+#divSocial a.fa-youtube.active {
+  background: #bb0000!important;
+}
+
+
+#divSocial a.fa-pinterest:hover {
+  background: #cb2027;
+}
+#divSocial a.fa-pinterest.active {
+  background: #cb2027!important;
+}
+
+
+
+
+
+ 
