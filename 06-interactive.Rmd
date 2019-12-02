@@ -24,10 +24,10 @@
 </div>
 
 
-<div class="has-toggle-input" style="padding: 10px; float:left;"><label class="lblyear" year="2018">
+<div class="has-toggle-input" style="padding: 10px; float:left;"><label class="lblyear active" year="2018">
 		2018
 	</label>
-	<label class="lblyear active" year="2019">
+	<label class="lblyear" year="2019">
 		2019
 	</label></div>
 	
