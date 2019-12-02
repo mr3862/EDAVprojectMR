@@ -7,37 +7,28 @@ library(tidyverse)
 library(jsonlite)
 
 
-core_trends_raw = readr::read_csv("data/core_trends.csv")
+states <- blscrapeR::state_fips %>% 
+  transmute(state_code = state_abb,
+            state_name=state,
+            state_id = as.numeric(fips_state)) 
 
-state_config = state_fips %>% 
-  dplyr::rename(
-    state_code = state_abb,state_name=state) %>% 
-  dplyr::mutate(state_id = as.numeric(fips_state)) %>%
-  dplyr::select(state_id,state_code,state_name)
+data <- readr::read_csv("../../data/core_trends.csv") %>%
+  select(year, state, contains('sm.use.')) %>%
+  set_names(gsub('sm.use.', '', names(.)))
 
+tidy <- data %>%
+  gather(app, response, -year, -state) %>%
+  filter(!is.na(response), app != 'reddit') %>%
+  group_by(year, state, app) %>%
+  summarise(percent_use = sum(response == 1) / n(), 
+            total_respondents = n()) %>%
+  ungroup() %>%
+  rename(state_id = state) %>%
+  inner_join(states)
 
-core_trends = core_trends_raw %>% 
-  dplyr::mutate(twitter = ifelse(sm.use.twitter==1,"1",NA),
-                instagram = ifelse(sm.use.instagram==1,"1",NA),
-                facebook = ifelse(sm.use.facebook==1,"1",NA),
-                snapchat = ifelse(sm.use.snapchat==1,"1",NA),
-                youtube = ifelse(sm.use.youtube==1,"1",NA),
-                whatsapp = ifelse(sm.use.whatsapp==1,"1",NA),
-                pintrest = ifelse(sm.use.pintrest==1,"1",NA),
-                linkedin = ifelse(sm.use.linkedin==1,"1",NA) ) %>%
-  dplyr::select(year,state,twitter,instagram,facebook,snapchat,youtube,whatsapp,pintrest,linkedin)
-
-
-trend_tidy = core_trends %>%
-  tidyr::gather("social_media", "user",-year,-state) %>% 
-  dplyr::filter(is.na(user) ==FALSE) %>%
-  count(year,state,social_media) %>%
-  dplyr::rename(user = n,state_id=state)
-
-dataset = inner_join(state_config, trend_tidy)
-
-json <- toJSON(dataset, dataframe = "rows")
+json <- toJSON(tidy, dataframe = "rows")
 json = paste0("{\"data\":",json,"}")
 
 
 write(json,"..//..//docs//data//state_social_media.json")
+

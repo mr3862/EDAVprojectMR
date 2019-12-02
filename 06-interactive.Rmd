@@ -12,15 +12,15 @@
 
 
 
-<div id="divSocial" style="padding: 10px; float:left; width:400px;"><a href="#" class="fa fa-facebook active"  media="facebook" title="facebook"></a>
-<a href="#" class="fa fa-linkedin"  media="linkedin" title="linkedin"></a>
-<a href="#" class="fa fa-twitter"  media="twitter" title="twitter"> </a>
-<a href="#" class="fa fa-instagram"  media="instagram" title="instagram"> </a>
+<div id="divSocial" style="padding: 10px; float:left; width:400px;"><a href="#" class="fa fa-youtube active"  media="youtube" title="Youtube"></a>
+<a href="#" class="fa fa-facebook"  media="facebook" title="Facebook"></a>
+<a href="#" class="fa fa-instagram"  media="instagram" title="Instagram"></a>
+<a href="#" class="fa fa-pinterest"  media="pintrest" title="Pintrest"></a>
 <br>
-<a href="#" class="fa fa-snapchat-ghost"  media="snapchat" title="snapchat"></a>
-<a href="#" class="fa fa-whatsapp"  media="whatsapp" title="whatsapp"></a>
-<a href="#" class="fa fa-youtube"  media="youtube" title="youtube"></a>
-<a href="#" class="fa fa-pinterest"  media="pintrest" title="pintrest"></a>
+<a href="#" class="fa fa-linkedin"  media="linkedin" title="Linkedin"></a>
+<a href="#" class="fa fa-twitter"  media="twitter" title="Twitter"></a>
+<a href="#" class="fa fa-snapchat-ghost"  media="snapchat" title="Snapchat"></a>
+<a href="#" class="fa fa-whatsapp"  media="whatsapp" title="Whatsapp"></a>
 </div>
 
 
@@ -33,8 +33,8 @@
 	
 <div style="clear:both">
 </div>
-<div style="padding:5px;"><span style="padding-left:150px; font-size:20px;">
-		US State Choropleth for <span id="spnSocialMedia" style="font-weight:bolder;color:green">facebook</span> users in <span id="spnYear" style="font-weight:bolder;color:green">2018</span>
+<div style="padding:5px;"><span style="padding-left:25px; font-size:20px;">
+		US State Choropleth for <span id="spnSocialMedia" style="font-weight:bolder;color:green">Youtube</span> users in <span id="spnYear" style="font-weight:bolder;color:green">2018</span>
 	</span>
 </div>
 
@@ -51,10 +51,10 @@
     var margin = { top: 20, right: 20, bottom: 20, left: 20 };
     var svg = d3.select("#chart").append("svg").attr("width", width).attr("height", height);
 		svg.append("g").attr("id","map");
-		var year = "2018",social_media = "facebook";
+		var year = "2018",social_media = "youtube";
 		
 		var projection = d3.geoAlbersUsa() 
-		   //.translate([width/2, height/3])    // translate to center of screen
+		   .translate([425, height/3])    // translate to center of screen
 		   .scale([1000]);          // scale things down so see entire US
 
 		var path = d3.geoPath()  
@@ -63,12 +63,16 @@
 		var map_dataset = null;
 		var social_dataset = null;
 					
-		var lowColor = '#f9f9f9';
-		var highColor = '#bc2a66';
+		//var lowColor = '#f9f9f9';
+		//var highColor = '#bc2a66';
 		var minVal = 0;
 		var maxVal = 0;
 		var w = 140, h = 400;
 		
+		var lowColor = '#fff';
+		//var highColor = '#bc2a66';
+		var highColorConf = {"youtube":"#bb0000","facebook":"#3B5998","instagram":"#125688","pintrest":"#cb2027",
+		"linkedin":"#007bb5","twitter":"#55ACEE ","snapchat":"#fffc00","whatsapp":"#25d366"};
 		
 		function drawLegend(){
 
@@ -83,7 +87,7 @@
   
   		legend.append("stop")
   			.attr("offset", "0%")
-  			.attr("stop-color", highColor)
+  			.attr("stop-color", highColorConf[social_media])
   			.attr("stop-opacity", 1);
   			
   		legend.append("stop")
@@ -96,18 +100,18 @@
   			.attr("width", w - 100)
   			.attr("height", h)
   			.style("fill", "url(#gradient)")
-  			.attr("transform", "translate(20,20)");
+  			.attr("transform", "translate(5,20)");
   
   		var y = d3.scaleLinear()
-  			.range([h, 0])
-  			.domain([minVal, maxVal]);
+  			.range([h-10, 0])
+  			.domain([0, 100]);
   
   		var yAxis = d3.axisRight(y).ticks(10);
   
   		svg.append("g")
   			.attr("id","grp_scale")
   			.attr("class", "y axis")
-  			.attr("transform", "translate(20, 20)")
+  			.attr("transform", "translate(5, 25)")
   			.call(yAxis);			
 
 		}
@@ -124,7 +128,7 @@
 			
 			legend.append("stop")
 				.attr("offset", "0%")
-				.attr("stop-color", highColor)
+				.attr("stop-color", highColorConf[social_media])
 				.attr("stop-opacity", 1);
 				
 			legend.append("stop")
@@ -135,7 +139,7 @@
 			svg.select("rect#lgnd")
 				.style("fill", "url(#gradient)");
 				
-
+      /*
 			var y = d3.scaleLinear()
 				.range([h, 0])
 				.domain([minVal, maxVal]);
@@ -143,14 +147,14 @@
 			var yAxis = d3.axisRight(y).ticks(10);
 
 			svg.select("g#grp_scale")
-				.call(yAxis);			
+				.call(yAxis);	*/		
 
 		}
 		
 
 		function populateStat(){
 		
-			 var select_dataset = social_dataset.filter(sm => sm.year == year && sm.social_media == social_media);
+			 var select_dataset = social_dataset.filter(sm => sm.year == year && sm.app == social_media);
 			for (var i = 0; i < map_dataset.length; i++) {
 				var state_id = Number(map_dataset[i].id);
 				
@@ -159,26 +163,40 @@
 			}
 			
 			var div = d3.select("div#tooltip");	
-			minVal = d3.min(select_dataset.map(d=>d.user));
-			maxVal = d3.max(select_dataset.map(d=>d.user));
-			var ramp = d3.scaleLinear().domain([minVal,maxVal]).range([lowColor,highColor]);
+			//minVal = d3.min(select_dataset.map(d=>d.user));
+			//maxVal = d3.max(select_dataset.map(d=>d.user));
+			var ramp = d3.scaleLinear().domain([0,1]).range([lowColor,highColorConf[social_media]]);
 			
 			svg.select("g#map")
 			.selectAll("path")
 			.data(map_dataset, d=>d.id)
 			.on("mouseover", function(d) {  
 				var html = "State: " + d.properties.name +"<br/>"
-							+ "Social Media: "+ social_media +"<br/>"
+							+ "Social Media: "+ social_media.charAt(0).toUpperCase() + social_media.slice(1) +"<br/>"
 							+ "Year: "+ year +"<br/>"
-							+ "No. of User: <strong>"+ d.select_data.user +"</strong>";
+							+ "User: <strong>"+ Number(Number(d.select_data.percent_use) * 100).toFixed(2) +"%</strong>"+"<br/>"
+							+ "Total Respondents: <strong>"+ d.select_data.total_respondents +"</strong>";
 				div.transition()        
 					.duration(200)      
 					.style("opacity", .9);      
-				div .html(html)  
-					.style("left", (d3.event.pageX) + "px")     
-					.style("top", (d3.event.pageY - 28) + "px"); 
-					//.style("left", (d3.mouse(this)[0]) + "px")   	
-          //.style("top", (d3.mouse(this)[1]) + "px");	
+
+          var padX = d3.event.pageX;
+          var padY = d3.event.pageY - 30;
+          
+          if (d3.selectAll(".book").classed("with-summary") == true) {
+            try{
+              var sum_div = d3.select(".book .book-summary")
+              var pxl = parseInt(sum_div.style("width"))
+              padX = padX - pxl;
+              
+            }catch(error) {
+            }
+          }
+        
+          div.html(html)  
+              .style("left", padX + "px")     
+              .style("top", padY + "px"); 
+                    
             })                  
 			.on("mouseout", function(d) {       
 				div.transition()        
@@ -190,7 +208,7 @@
 			.style("fill", function(d) { 
 				//console.log(d.id);
 				if(d.select_data){
-					return ramp(d.select_data.user); 
+					return ramp(d.select_data.percent_use); 
 				}else{
 					return ramp(0);
 				}
@@ -211,13 +229,13 @@
 			.enter()
 			.append("path")
 			.attr("d", path)
-			.style("stroke", "#fff")
+			.style("stroke", "#e0e0e0")
 			.style("stroke-width", "1")
 			.style("fill", "#000");
 			
 			d3.json("data/state_social_media.json").then (function(social) {
-				 var dataset = social.data;
-				 social_dataset = dataset;
+			
+				 social_dataset = social.data;
 				 map_dataset = json.features;
 
 				populateStat();
@@ -238,7 +256,7 @@
 			
 			social_media = this.attributes.media.value;
 			//console.log(social_media);
-			$("#spnSocialMedia").html(social_media);
+			$("#spnSocialMedia").html(this.attributes.title.value);
 			
 			populateStat();
 			
@@ -254,7 +272,7 @@
 			
 			year = this.attributes.year.value;
 			$("#spnYear").html(year);
-
+      /*
 			if(year == "2019"){
 				lowColor = "#D5CABD";
 				highColor = "#845EC2";
@@ -263,7 +281,7 @@
 				lowColor = '#f9f9f9';
 				highColor = '#bc2a66';
 			}
-			
+			*/
 			 populateStat();
 		}	
 
